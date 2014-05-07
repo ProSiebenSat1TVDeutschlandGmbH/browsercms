@@ -153,11 +153,32 @@ class Cms::Page < ActiveRecord::Base
 
   # Publish all
   def after_publish
+    search_cache = []
     self.reload # Get's the correct version number loaded
     self.connectors.for_page_version(self.version).order("position").to_a.each do |c|
       if c.connectable_type.constantize.publishable? && con = c.connectable
         con.publish
       end
+      if c.connectable.respond_to?(:search_cache_content)
+        search_cache << c.connectable.search_cache_content
+      end
+    end
+    if search_cache.size > 0
+      # update search_cache
+      cleaned_string = search_cache.join(" ").gsub(/<\/?[^>]*>/, "").gsub(/\r\n?/, " ");
+      # raw update to avoid callbacks! important!
+      connection.update(
+        "UPDATE pages " +
+        "SET search_cache = #{quote_value(cleaned_string)} " +
+        "WHERE pages.id = #{quote_value(id)}",
+        "Pages Search Cache"
+      )
+      connection.update(
+        "UPDATE page_versions " +
+        "SET search_cache = #{quote_value(cleaned_string)} " +
+        "WHERE original_record_id = #{quote_value(id)} and version = #{self.version}",
+        "Pages Search Cache"
+      )      
     end
   end
 
