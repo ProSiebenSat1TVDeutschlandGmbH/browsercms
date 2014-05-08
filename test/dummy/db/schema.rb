@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130924162315) do
+ActiveRecord::Schema.define(version: 20140507070642) do
 
   create_table "catalog_versions", force: true do |t|
     t.string   "name"
@@ -420,6 +420,11 @@ ActiveRecord::Schema.define(version: 20130924162315) do
     t.integer  "updated_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "og_title"
+    t.text     "og_description"
+    t.string   "og_image"
+    t.text     "custom_html"
+    t.text     "search_cache"
   end
 
   add_index "cms_page_versions", ["original_record_id"], name: "index_cms_page_versions_on_original_record_id", using: :btree
@@ -444,6 +449,11 @@ ActiveRecord::Schema.define(version: 20130924162315) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "latest_version"
+    t.string   "og_title"
+    t.text     "og_description"
+    t.string   "og_image"
+    t.text     "custom_html"
+    t.text     "search_cache"
   end
 
   add_index "cms_pages", ["deleted"], name: "index_cms_pages_on_deleted", using: :btree
