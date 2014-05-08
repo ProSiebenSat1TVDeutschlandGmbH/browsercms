@@ -168,15 +168,15 @@ class Cms::Page < ActiveRecord::Base
       cleaned_string = search_cache.join(" ").gsub(/<\/?[^>]*>/, "").gsub(/\r\n?/, " ");
       # raw update to avoid callbacks! important!
       connection.update(
-        "UPDATE pages " +
-        "SET search_cache = #{quote_value(cleaned_string)} " +
-        "WHERE pages.id = #{quote_value(id)}",
+        "UPDATE cms_pages " +
+        "SET search_cache = #{self.class.quote_value(cleaned_string)} " +
+        "WHERE cms_pages.id = #{self.class.quote_value(id)}",
         "Pages Search Cache"
       )
       connection.update(
-        "UPDATE page_versions " +
-        "SET search_cache = #{quote_value(cleaned_string)} " +
-        "WHERE original_record_id = #{quote_value(id)} and version = #{self.version}",
+        "UPDATE cms_page_versions " +
+        "SET search_cache = #{self.class.quote_value(cleaned_string)} " +
+        "WHERE original_record_id = #{self.class.quote_value(id)} and version = #{self.version}",
         "Pages Search Cache"
       )      
     end
