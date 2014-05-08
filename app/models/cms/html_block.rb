@@ -35,5 +35,9 @@ module Cms
       "Text"
     end
 
+    # search cache
+    def search_cache_content
+      content
+    end
   end
 end
