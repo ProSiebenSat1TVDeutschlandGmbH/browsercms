@@ -1,24 +1,24 @@
 <%= content_for :html_head do %>
-    <meta name="generator" content="BrowserCMS <%= Cms.version %>"/>
-    <%# JQuery is required both for page_editor and cms/user. But it needs to be included only once.  %>
-    <%= javascript_include_tag 'jquery' %>
-    <% if @show_toolbar %>
-        <script type="text/javascript" charset="utf-8">
-          var page_id = <%= @page.id %>;
-        </script>
-        <%= javascript_include_tag 'cms/page_editor' %>
-        <%= stylesheet_link_tag 'cms/page_content_editing' %>
-        <%= csrf_meta_tags %>
-    <% end %>
-    <%= javascript_include_tag 'cms/site' %>
+  <meta name="generator" content="BrowserCMS <%= Cms.version %>"/>
+  <%# JQuery is required both for page_editor and cms/user. But it needs to be included only once.  %>
+  <%= javascript_include_tag 'jquery' %>
+  <% if @show_toolbar %>
+    <script type="text/javascript" charset="utf-8">
+      var page_id = <%= @page.id %>;
+    </script>
+    <%= javascript_include_tag 'cms/page_editor' %>
+    <%= stylesheet_link_tag 'cms/page_content_editing' %>
+    <%= csrf_meta_tags %>
+  <% end %>
+  <%= javascript_include_tag 'cms/site' %>
 <% end %>
 <% if @show_toolbar %>
-    <% flash.keep %>
+  <% flash.keep %>
 <% end %>
 
 <% @_connectors.each_with_index do |connector, i| %>
-    <%= content_for(connector.container.to_sym) do %>
-        <%= render_connector_and_connectable(connector, @_connectables[i]) %>
-    <% end %>
+  <%= content_for(connector.container.to_sym) do %>
+    <%= render_connector_and_connectable(connector, @_connectables[i]) %>
+  <% end %>
 <% end %>
 
