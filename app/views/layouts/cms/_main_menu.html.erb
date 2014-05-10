@@ -39,7 +39,7 @@
           <span class="glyphicon glyphicon-book"></span>
           Library <b class="caret"></b>
         <% end %>
-        <%= render partial: 'layouts/cms/content_types', locals: { library: true, id: 'content-library-menu' } %>
+        <%= render partial: 'layouts/cms/content_types', locals: { library: true, position: "right", id: 'content-library-menu' } %>
       </li>
       <% end %>
       <% if current_user.able_to? :administrate %>
@@ -74,15 +74,23 @@
           <span class="glyphicon glyphicon-plus"></span>
           New <b class="caret"></b>
         <% end %>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu multi-level">
+          <% subclasses = Cms::ContentType.grouped_by_cms_and_custom %>
+          <%- if subclasses[:custom].length > 0 -%>
+            <li class="dropdown-submenu left">
+              <a tabindex="-1" href="#">Custom Modules</a>
+              <ul class="dropdown-menu">
+                <%- subclasses[:custom].each do |type| -%>
+                  <%= nav_link_to h(type.display_name), new_engine_aware_path(type, type: type.name.underscore) %>
+                <%- end -%>
+              </ul>
+            </li>
+            <li class="divider">&amp;nbsp;</li>
+          <%- end -%>
           <%= render 'cms/toolbar/new_pages_menu' %>
-          <% modules = Cms::ContentType.available_by_module
-             modules.keys.sort.each_with_index do |module_name, i| %>
-              <%= divider_tag(i) %>
-              <% modules[module_name].each do |type| %>
-                  <%= nav_link_to h(type.display_name), new_engine_aware_path(type), id: "create_new_#{type.param_key}" %>
-              <% end -%>
-          <% end %>
+          <%- subclasses[:cms].each do |type| -%>
+            <%= nav_link_to h(type.display_name), new_engine_aware_path(type), id: "create_new_#{type.param_key}" %>
+          <%- end -%>
         </ul>
       </li>
       <% end %>

@@ -45,6 +45,10 @@ module Cms
       #
       # @return [Array<Cms::ContentType] An alphabetical list of content types.
       def available
+        subclasses_by_content_type.compact.sort { |a, b| a.name <=> b.name }
+      end
+
+      def subclasses_by_content_type
         subclasses = ObjectSpace.each_object(::Class).select do |klass|
           klass < Cms::Concerns::HasContentType::InstanceMethods
         end
@@ -54,7 +58,20 @@ module Cms
           unless klass < Cms::Portlet
             Cms::ContentType.new(name: klass.name)
           end
-        end.compact.sort { |a, b| a.name <=> b.name }
+        end
+      end
+
+      # Returns a grouped list of all ContentTypes by standard and custom modules
+      #
+      # @return {cms: Array<Cms::ContentType, custom:Array<Cms::ContentType} An alphabetical list of content types.
+      def grouped_by_cms_and_custom
+        subclasses = subclasses_by_content_type.reject{|c| c.nil? }
+        cms_classes = subclasses.select{ |s| s.name.to_s.deconstantize == "Cms" }
+        custom_classes = subclasses - cms_classes
+        {
+          cms: cms_classes.sort_by{ |s| s.name },
+          custom: custom_classes.sort_by{ |s| s.name }
+        }
       end
 
       def list

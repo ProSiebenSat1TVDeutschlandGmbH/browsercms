@@ -1,13 +1,17 @@
-<ul class="dropdown-menu" id="<%= id %>">
-  <% if library %>
-    <%= nav_link_to "Text", cms.content_library_path %>
-    <%= divider_tag %>
-  <% end %>
-  <% modules = Cms::ContentType.available_by_module
-     modules.keys.sort.each_with_index do |module_name, i| %>
-      <%= divider_tag(i) %>
-      <% modules[module_name].each do |type| %>
+<% subclasses = Cms::ContentType.grouped_by_cms_and_custom %>
+<ul class="dropdown-menu multi-level" id="<%= id %>" role="menu">
+  <%- if subclasses[:custom].length > 0 -%>
+    <li class="dropdown-submenu <%= position %>">
+      <a tabindex="-1" href="#">Custom Modules</a>
+      <ul class="dropdown-menu">
+        <%- subclasses[:custom].each do |type| -%>
           <%= nav_link_to h(type.display_name), engine_aware_path(type) %>
-      <% end -%>
-  <% end %>
+        <%- end -%>
+      </ul>
+    </li>
+    <li class="divider">&amp;nbsp;</li>
+  <%- end -%>
+  <%- subclasses[:cms].each do |type| -%>
+    <%= nav_link_to h(type.display_name), engine_aware_path(type) %>
+  <%- end -%>
 </ul>

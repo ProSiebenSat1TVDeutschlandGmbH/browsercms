@@ -55,3 +55,27 @@ footer {
   }
   color: #BFBFBF;
 }
+
+.dropdown-menu {
+  border-radius: 0 0 4px 4px !important;
+  -webkit-border-radius: 0 0 4px 4px !important;
+  -moz-border-radius: 0 0 4px 4px !important;
+  li a {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 15px;
+  }
+  .divider {
+    margin: 2px;
+  }
+  .dropdown-submenu {
+    position: relative;
+    top: 1px;
+    border-radius: 0 0 4px 4px !important;
+    -webkit-border-radius: 0 0 4px 4px !important;
+    -moz-border-radius: 0 0 4px 4px !important;
+  }
+  .dropdown-submenu.left > .dropdown-menu { left: auto; right: 100%; }
+  .dropdown-submenu.left > a:after { position: absolute; left: 5px; top: 3px; float: none; border-right-color: #cccccc; border-width: 5px 5px 5px 0; }
+  .dropdown-submenu.left:hover > a:after { border-right-color: #ffffff; }
+}

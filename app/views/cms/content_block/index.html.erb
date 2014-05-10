@@ -18,7 +18,7 @@
         <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-purpose="subheader">
           <%= content_type.display_name_plural %> &nbsp;<span class="caret"></span>
         </button>
-        <%= render partial: 'layouts/cms/content_types', locals: {library: false, id: 'asset-selector-menu'} %>
+        <%= render partial: 'layouts/cms/content_types', locals: {library: false, position: "left", id: 'asset-selector-menu'} %>
       </div>
       
       <%= link_to "New", new_engine_aware_path(@search_filter.model_class), class: "btn btn-default"%>

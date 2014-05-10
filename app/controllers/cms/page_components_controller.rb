@@ -5,7 +5,7 @@ module Cms
 
     def new
       @default_type = Cms::ContentType.default
-      @content_types = Cms::ContentType.other_connectables
+      @content_types = Cms::ContentType.grouped_by_cms_and_custom
     end
 
     def update
