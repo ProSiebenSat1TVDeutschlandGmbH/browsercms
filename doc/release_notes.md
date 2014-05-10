@@ -3,6 +3,9 @@
 * Optimized UI
 * Add Toolbar to connectables in edit mode
 * Add attachment manager to html block by default
+* Add search cache to pages for a simple search. Override search_cache_content in your Portlets/Content Blocks
+* Add drag n drop sorting in edit view
+* Allow overriding custom CMS logo. Use Cms.logo for setting the path to a asset image
 
 
 # v4.0.0.beta
