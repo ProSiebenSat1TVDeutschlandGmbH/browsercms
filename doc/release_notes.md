@@ -1,4 +1,4 @@
-# v4.0.1.beta
+# v4.0.1
 
 * Optimized UI
 * Add Toolbar to connectables in edit mode
