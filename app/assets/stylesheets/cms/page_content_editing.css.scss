@@ -1,12 +1,16 @@
 .cms-container {
   background-color: #efefef;
   position: relative;
+  padding-bottom: 10px;
   .cms-container-contents {
     min-height: 20px;
+    padding-bottom: 20px;
   }
   .cms-toolbar {
     background-color: black;
     padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
   .cms-connector {
     outline: 1px solid transparent;
