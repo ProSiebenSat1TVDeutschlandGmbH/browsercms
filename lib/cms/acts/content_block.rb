@@ -50,6 +50,15 @@ module Cms
           def to_s
             "#{self.class.name.demodulize.titleize} '#{name}'"
           end
+
+          def expired_content?
+            if self.respond_to?(:valid_from) and self.respond_to?(:valid_to)
+              if (self.valid_to.present? and Time.now > self.valid_to) or (self.valid_from.present? and Time.now < self.valid_from)
+                return true
+              end
+            end
+            return false
+          end
         end
 
 

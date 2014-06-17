@@ -61,6 +61,10 @@
     &.disabled {
       cursor: default;
     }
+    &.expired {
+      background-color: red;
+      color: white;
+    }
   }
   .cms-type-btn {
     background-color: #f0ad4e;

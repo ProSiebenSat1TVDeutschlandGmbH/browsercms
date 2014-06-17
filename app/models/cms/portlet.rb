@@ -65,6 +65,10 @@ module Cms
           false
         end
 
+        # TODO Portlets can't expire yet
+        def expired_content?
+          false
+        end
 
       end
     end

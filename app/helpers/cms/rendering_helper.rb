@@ -64,7 +64,7 @@ module Cms
     def render_connector_and_connectable(connector, connectable)
       if is_current_user_able_to_edit_this_content?(connector.page)
         render(:partial => 'cms/pages/edit_content', :locals => {:connector => connector, :connectable => connectable})
-      else
+      elsif !connectable.expired_content?
         render_connectable(connectable)
       end
     end

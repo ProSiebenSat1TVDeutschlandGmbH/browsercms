@@ -28,6 +28,15 @@
 </div>
 <% end %>
 <div class="panel panel-default">
+  <div class="panel-heading">Validity</div>
+  <div class="panel-body">
+    <div class="col-sm-12">
+      <%= f.input :valid_from, as: :string, placeholder: "Format: YYYY-MM-DD HH:MM" %>
+      <%= f.input :valid_to, as: :string, placeholder: "Format: YYYY-MM-DD HH:MM", hint: "Leave blank for unlimited validity"  %>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
   <div class="panel-heading">Actions</div>
   <div class="panel-body">
     <%=  yield :sidebar_actions if content_for(:sidebar_actions)%>

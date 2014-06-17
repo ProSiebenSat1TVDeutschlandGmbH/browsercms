@@ -8,7 +8,7 @@
     <div class="col-sm-<%= @block.new_record? ? 12 : 8 %> main-content">
       <%= render block_form, f: f %>
     </div>
-    <%= render partial: 'sidebar', layout: 'sidebar_layout' unless @block.new_record? %>
+    <%= render partial: 'sidebar', :locals => { f: f }, layout: 'sidebar_layout' unless @block.new_record? %>
   </div>
   <%= render :partial => "version_conflict_diff", :locals => {:other_version => @other_version, :your_version => @block} if @other_version %>
   <%= bottom_buttons f unless @hide_buttons %>

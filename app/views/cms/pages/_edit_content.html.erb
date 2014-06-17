@@ -16,6 +16,9 @@
       <%= link_to("Edit", edit_engine_aware_path(connectable, :_redirect_to => @page.path), class: 'cms-edit-content-link cms-btn',
                   title: "Edit this content.") %>
       <span class="cms-btn cms-type-btn disabled"><%= connectable.display_name%></span>
+      <% if connectable.expired_content? %>
+        <span class="cms-btn cms-type-btn expired">expired</span>
+      <% end %>
     </div>
     <%= render_connectable connectable %>
 <% end %>

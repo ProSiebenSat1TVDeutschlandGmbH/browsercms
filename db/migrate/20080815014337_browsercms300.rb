@@ -91,6 +91,7 @@ class Browsercms300 < ActiveRecord::Migration
       t.boolean :archived, :default => false
       t.boolean :deleted, :default => false
       t.integer :created_by_id, :updated_by_id
+      t.datetime :valid_from, :valid_to
       t.timestamps
     end
     create_table :cms_portlet_attributes do |t|
