@@ -1,3 +1,6 @@
+# v4.0.2
+* Add validity to content_blocks_
+
 # v4.0.1
 
 * Optimized UI
