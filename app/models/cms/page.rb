@@ -455,4 +455,13 @@ class Cms::Page < ActiveRecord::Base
     end
   end
 
+  def add_custom_tag(tag)
+    @tags = [] unless @tags
+    @tags << tag
+  end
+
+  def custom_tags
+    @tags
+  end
+    
 end
