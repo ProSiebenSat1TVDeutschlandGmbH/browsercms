@@ -12,21 +12,19 @@
     </span>
   </div>
   <% end %>
-  <%= form_tag engine_aware_path(@search_filter.path), method: :put, class: 'col-sm-8' do %>
-    <div class="pull-right">
+  <%= form_tag engine_aware_path(@search_filter.path), method: :put do %>
+    <div class="col-sm-6">
       <div class="btn-group">
-        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-purpose="subheader">
+        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-purpose="subheader">
           <%= content_type.display_name_plural %> &nbsp;<span class="caret"></span>
-        </button>
+        </a>
         <%= render partial: 'layouts/cms/content_types', locals: {library: false, position: "left", id: 'asset-selector-menu'} %>
       </div>
-      
+
       <%= link_to "New", new_engine_aware_path(@search_filter.model_class), class: "btn btn-default"%>
-      
+
     </div>
-  <% end %>
-</div>
-<div class="row">
+    
     <div class="col-sm-12">
       <h4><%= @total_number_of_items %> ITEMS</h4>
       <table class="table table-striped table-bordered assets">
@@ -82,7 +80,9 @@
         </tfoot>
       </table>
     </div>
+  <% end %>
 
+</div>
 
 <div class='row'>
   <% if !@search_filter.term.blank? && @blocks.size == 0 %>
